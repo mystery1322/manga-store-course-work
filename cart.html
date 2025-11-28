@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Корзина — Лавка Мечтаний</title>
+
+  <link rel="icon" type="image/png" href="images/fav.png">
+  <link href="style.css" rel="stylesheet">
+  <!-- если хочешь отдельный CSS только для корзины, подключи cart.css -->
+  <link href="cart.css" rel="stylesheet">
+</head>
+<body class="page-cart">
+  <!-- — можно использовать ту же шапку, что и на сайте — вставь сюда свой header если нужно -->
+  <header id="top" class="site-header">
+    <div class="aboba logo-block">
+      <a href="index.html" class="logo-link">
+        <img src="images/logo.png" alt="Логотип" width="79" class="site-logo">
+        <h1 class="site-title">Лавка Мечтаний✨</h1>
+      </a>
+    </div>
+
+    <button id="burgerBtn" class="burger icon-btn" aria-label="Открыть меню" aria-expanded="false" aria-controls="mainNav">
+      ☰
+    </button>
+
+    <!-- центр с гифками (декоративно) -->
+    <div class="header-center" aria-hidden="true">
+      <img src="images/bts-cats-cat.gif" alt="" class="header-gif">
+      <img src="images/bts-cats-cat.gif" alt="" class="header-gif">
+      <img src="images/bts-cats-cat.gif" alt="" class="header-gif">
+      <img src="images/bts-cats-cat.gif" alt="" class="header-gif">
+      <img src="images/bts-cats-cat.gif" alt="" class="header-gif">
+      <img src="images/bts-cats-cat.gif" alt="" class="header-gif">
+      <img src="images/bts-cats-cat.gif" alt="" class="header-gif">
+      <img src="images/bts-cats-cat.gif" alt="" class="header-gif">
+    </div>
+
+    <nav class="main-nav" aria-label="Главное меню">
+      <ul>
+        <li><a href="index.html"><span class="no-wrap">✨О нас</span></a></li>
+        <li><a href="catalog.html" class="active">Каталог</a></li>
+        <li><a href="cart.html">Корзина <span id="cart-badge" class="cart-badge" aria-hidden="true" style="font-family:'Roboto', sans-serif;">0</span></a></li>
+        <li><a href="profile.html">Мой профиль</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main style="padding:110px 20px 30px;">
+    <section id="cart-root">
+      <!-- сюда будет рендериться корзина -->
+    </section>
+  </main>
+
+  <footer class="site-footer right" style="margin-top:100px;">
+    <h2>Связь с нами</h2>
+    <address>
+      Телефон: <a href="tel:896742993722">896742993722</a><br>
+      Почта: <a href="mailto:manga-shop@mail.ru">manga-shop@mail.ru</a><br>
+      Разработчик: Ирицян Артур
+    </address>
+  </footer>
+
+  <!-- общий скрипт (если у тебя есть scripts.js, он должен подключаться перед cart.js) -->
+  <script src="scripts.js" defer></script>
+  <!-- скрипт корзины -->
+  <script src="cart.js" defer></script>
+</body>
+</html>

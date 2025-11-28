@@ -1,0 +1,362 @@
+/* ===================================================================
+   style.css — финальная версия без правил каталога (catalog.css берёт на себя каталог-специфику)
+   Сохранено: глобальные стили, header, nav, общие утилиты и медиаправила для header/menu.
+   Каталог-специфичные правила удалены: .catalog-wrapper, .catalog-filters, .product-grid,
+   .product-card, .filter-group, .search-input, .select, .catalog-empty и связанные мобильные правила.
+   =================================================================== */
+
+/* ---------------------- 1. GLOBAL / RESET / TYPOGRAPHY ---------------------- */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.5;
+  color: #222;
+  background: #fff;
+}
+
+/* Заголовки (используются повсеместно) */
+h1 { color: rgb(31, 31, 139); margin: 0; font-size: 22px; }
+h2 { color: rgb(139, 0, 60); margin: 0 0 8px 0; }
+
+/* Утилиты общего пользования */
+.center { text-align: center; }
+.right { text-align: right; }
+
+/* ---------------------- 2. SITE HEADER / NAV / LOGO (общие) ---------------------- */
+/* Фиксированная шапка (используется на index.html и catalog.html). */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  padding: 12px 20px;
+  background: #ffffff;
+  border-bottom: 2px solid #000;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Левый блок — логотип/название */
+.logo-link { display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit; }
+.logo-block { display: flex; gap: 12px; align-items: center; position: relative; }
+
+
+/* --- Быстрый фикс: уменьшить расстояние между строками у названия --- */
+.site-title {
+  display: inline-block;   /* стабильнее внутри flex-контейнера */
+  line-height: 1;          /* плотность строк — уменьшить значение, если нужно */
+  margin-top: 0;           /* убрать лишний верхний отступ */
+  white-space: normal;     /* разрешаем переносы, но без растягивания */
+  word-spacing: normal !important;
+  letter-spacing: normal !important;
+  font-size: 190%;
+  font-family: "Lucida Handwriting", cursive;
+  margin-top: 10px;
+}
+
+/* На мобильных — ещё плотнее (подвинуть вторую строку ближе) */
+@media (max-width: 820px) {
+  .site-title {
+    font-size: 1.5rem;    /* подкорректируй под нужный размер */
+    line-height: 0.95;     /* можно опустить до 0.9 — смотри результат */
+  }
+}
+
+
+/* Блок центральный (гифки) — будет скрываться на мобильных */
+.header-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.header-gif {
+  display: block;
+  max-height: 56px;
+  margin-left: 20px;
+  margin-top: 22px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Кнопки и иконки в header */
+.icon-btn { background: transparent; border: none; cursor: pointer; padding: 6px; border-radius: 6px; }
+
+/* Главное меню (горизонтально на десктопе) */
+.main-nav ul {
+  display: flex;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  list-style: none;
+  font-family: "Lucida Handwriting", cursive;
+  margin-top: 10px;
+}
+.main-nav li { display: block; }
+.main-nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #2a1365;
+  transition: background .18s ease, color .18s ease, transform .12s ease;
+  white-space: normal;
+  line-height: 1.1;
+  font-weight: 700;
+}
+.main-nav a:hover,
+.main-nav a:focus,
+.main-nav a:focus-visible {
+  background: #f7dfe6;
+  color: crimson;
+  transform: translateY(-1px);
+}
+
+/* Специфично: не допускать перенос в "О нас" */
+.main-nav a .no-wrap { display: inline-block; white-space: nowrap; overflow-wrap: normal; word-break: normal; }
+
+/* Кнопка гамбургера — скрыта на десктопе, появляется на мобилке (см. медиазапросы) */
+.burger { display: none; background:transparent; border:none; font-size:24px; padding:6px; cursor:pointer; margin-top: 5px; }
+
+/* ---------------------- 3. SHARED LAYOUT: content / main / aside / footer ---------------------- */
+.content {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  padding: 110px 20px 20px; /* отступ, чтобы не перекрывать фикс. header */
+}
+
+main {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0;
+}
+
+/* Боковая панель, используется и на index.html (sidebar) и как base для catalog-filters */
+.sidebar {
+  flex: 1;
+  border: 1px solid #000;
+  padding: 15px;
+  background: #d6ecf5;
+  position: sticky;
+  top: 118px;
+  margin-bottom: 8px;
+  height: fit-content;
+}
+
+/* Подвал (общий) */
+.site-footer {
+  border-top: 2px solid #000;
+  padding: 16px 20px;
+  background: #fcf9f9;
+  margin-top: 20px;
+}
+
+/* Общие карточные/блочные правила */
+section, figure {
+  border: 1px solid gray;
+  padding: 10px;
+  margin: 8px 0;
+  background-color: #fafafa;
+}
+
+/* Кнопки */
+.btn {
+  padding: 8px 12px;
+  border: none;
+  background: #2a1365;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* ---------------------- 4. SHARED COMPONENTS / MICRO-UTILS ---------------------- */
+.catalog-list { padding-left: 18px; }
+.feature-figure { border: 1px solid #ccc; padding: 8px; margin: 20px; background: #fff; }
+
+/* Центровка / hero */
+.hero { text-align: center; }
+
+/* Утилиты для титулов/мета */
+.price { color: #0a7a0a; font-weight: 700; }
+
+/* Красный бейдж корзины — используется в header и catalog */ 
+.cart-badge {
+  display: inline-block;
+  min-width: 20px;
+  padding: 2px 6px;
+  height: 20px;
+  line-height: 16px;
+  font-size: 12px;
+  text-align: center;
+  background: #ff3b30;
+  color: #fff;
+  border-radius: 999px;
+  margin-left: 8px;
+  vertical-align: middle;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.15);
+}
+.cart-badge.hidden { display: none; }
+
+/* ---------------------- 5. OPTIONAL / RARELY-USED (в самом низу) ---------------------- */
+/* Абсолютный бейдж в карточке — оставлен как утилита (не удалял, т.к. может понадобиться) */
+.product-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #ffb703;
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 4px;
+}
+
+/* Бейдж поверх логотипа (возможно не используется) */
+.logo-badge {
+  position: absolute;
+  top: -6px;
+  left: 60px;
+  background: crimson;
+  color: #fff;
+  padding: 2px 6px;
+  font-size: 12px;
+  border-radius: 4px;
+}
+
+/* Float-утилиты (если понадобятся) */
+.float-left { float: left; width: 160px; margin: 0 16px 12px 0; }
+.float-right { float: right; width: 160px; margin: 0 0 12px 16px; }
+.float-examples::after { content: ""; display: table; clear: both; }
+
+/* ---------------------- 6. ADAPTIVE / MEDIA QUERIES (header/menu focused) ---------------------- */
+/* Упрощённые медиаправила для header/gif/menu — каталожные медиаправила вынесены в catalog.css */
+
+/* <= 1520px — сократить количество гифок (header) */
+@media (max-width: 1520px) {
+  .header-center .header-gif:nth-child(n+7) { display: none; }
+  .header-center .header-gif { max-height: 56px; }
+}
+
+/* <= 1400px — далее сокращаем */
+@media (max-width: 1400px) {
+  .header-center .header-gif:nth-child(n+5) { display: none; }
+  .header-center .header-gif { max-height: 56px; }
+}
+
+/* <= 1000px */
+@media (max-width: 1200px) {
+  .header-center .header-gif:nth-child(n+3) { display: none; }
+  .header-center .header-gif { max-height: 56px; }
+}
+
+/* <= 1000px */
+@media (max-width: 1000px) {
+  .header-center .header-gif:nth-child(n+2) { display: none; }
+  .header-center .header-gif { max-height: 56px; }
+}
+
+
+@media (max-width: 820px) {
+  .header-center { display: none; }
+  .burger { display: inline-flex; align-items:center; justify-content:center; }
+  .main-nav { display: none; }
+
+  /* мобильное вертикальное меню (класс .menu-open добавляется через JS) */
+  .site-header.menu-open .main-nav {
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border-bottom: 1px solid #e6e6e6;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    z-index: 1200;
+    padding: 10px 12px;
+  }
+  .site-header.menu-open .main-nav ul {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+  }
+  .site-header.menu-open .main-nav a {
+    display: block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #2a1365;
+    font-weight: 700;
+  }
+}
+
+/* сверхузкие экраны */
+@media (max-width: 420px) {
+  .main-nav a .no-wrap { font-size: 0.95rem; }
+  .site-title { font-size: 1.58rem; }
+}
+
+
+/* ===== Переключение layout на column для главной страницы (mobile) ===== */
+/* Применяется только если на body есть класс .page-home — чтобы не ломать другие страницы */
+@media (max-width: 900px) {
+  /* ставим колонку: main сверху, aside снизу */
+  body.page-home .content {
+    flex-direction: column;
+    align-items: stretch;    /* чтобы main и aside растягивались по ширине */
+    gap: 12px;
+    padding: 90px 12px 20px; /* учёт фиксированной шапки (подкорректируй, если нужно) */
+  }
+
+  /* main остаётся первым */
+  body.page-home main {
+    order: 1;
+    width: 100%;
+  }
+
+  /* aside (баннер) уходит вниз и становится full-width */
+  body.page-home .sidebar,
+  body.page-home aside {
+    order: 2;
+    width: 100%;
+    flex: none;
+    position: static;   /* снимаем sticky, чтобы он не прилипал в колонке */
+    top: auto;
+    margin-top: 0;
+  }
+
+  /* если используется .catalog-filters или другой aside-класс — тоже отключаем sticky */
+  body.page-home .catalog-filters {
+    position: static;
+    top: auto;
+    width: 100%;
+  }
+
+  /* уменьшение внутренних отступов aside на мобилке для компактности */
+  body.page-home .sidebar,
+  body.page-home aside {
+    padding: 10px;
+  }
+}
+
+.burger { display: none !important; }
+
+@media (max-width:820px) {
+  .burger { display: inline-flex !important; }
+}
+
+  /* Скрыть мигающий курсор везде, кроме input/textarea/contenteditable */
+*:not(input):not(textarea):not([contenteditable="true"]) {
+  caret-color: transparent !important;
+}

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Лавка Мечтаний — О нас</title>
+
+    <!-- Подключение иконки сайта -->
+    <link rel="icon" type="image/png" href="images/fav.png">
+
+    <!-- Подключение CSS -->
+    <link href="style.css" rel="stylesheet">
+
+    <!-- Подключение шрифта Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    
+    <script src="scripts.js" defer></script>
+</head>
+
+</head>
+<script>
+/* Обновляет содержимое и видимость бейджа */
+(function(){
+    const BADGE_ID = 'cart-badge';
+    const CART_KEY = 'manga_cart_v1'; // тот же ключ, что и в коде корзины
+
+    function getCartCount() {
+        try {
+            const cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+            return cart.reduce((s,p) => s + (p.qty || 0), 0);
+        } catch (e) {
+         return 0;
+        }
+    }
+
+    function updateCartBadge() {
+        const el = document.getElementById(BADGE_ID);
+        if (!el) return;
+        const count = getCartCount();
+        el.textContent = count;
+        if (count === 0) el.classList.add('hidden');
+        else el.classList.remove('hidden');
+    }
+
+  // Обновляем при загрузке страницы
+    document.addEventListener('DOMContentLoaded', updateCartBadge);
+
+  // Если вы добавляете в корзину асинхронно, вызывайте updateCartBadge() после изменения localStorage.
+  // Также синхронизируем между вкладками:
+    window.addEventListener('storage', (ev) => {
+        if (ev.key === CART_KEY) updateCartBadge();
+    });
+
+  // Экспортим на window, чтобы другие скрипты могли вызывать
+    window.updateCartBadge = updateCartBadge;
+})();
+</script>
+
+<body class="page-home">
+    <!-- Шапка сайта с логотипом и меню -->
+    <header  class="site-header">
+        <div class="logo-block">
+            <a href="index.html" class="logo-link">
+                <img src="images/logo.png" alt="Логотип" width="79" class="site-logo">
+                <h1 class="site-title">Лавка Мечтаний✨</h1>
+            </a>
+        </div>
+    
+        <button id="burgerBtn" class="burger icon-btn" aria-label="Открыть меню" aria-expanded="false" aria-controls="mainNav">
+        ☰
+        </button>
+        <!-- новая центральная гифка -->
+        <div class="header-center">
+            <img src="images/bts-cats-cat.gif" alt="" aria-hidden="true" class="header-gif">
+            <img src="images/bts-cats-cat.gif" alt="" aria-hidden="true" class="header-gif">
+            <img src="images/bts-cats-cat.gif" alt="" aria-hidden="true" class="header-gif">
+            <img src="images/bts-cats-cat.gif" alt="" aria-hidden="true" class="header-gif">
+            <img src="images/bts-cats-cat.gif" alt="" aria-hidden="true" class="header-gif">
+            <img src="images/bts-cats-cat.gif" alt="" aria-hidden="true" class="header-gif">
+            <img src="images/bts-cats-cat.gif" alt="" aria-hidden="true" class="header-gif">
+            <img src="images/bts-cats-cat.gif" alt="" aria-hidden="true" class="header-gif">
+
+            <!-- если гиф информативна, поставь осмысленный alt вместо пустого -->
+        </div>
+
+        <nav class="main-nav" aria-label="Главное меню">
+            <ul>
+                <li><a href="index.html"><span class="no-wrap">✨О нас</span></a></li>
+                <li><a href="catalog.html" class="active">Каталог</a></li>
+                <li><a href="cart.html">Корзина <span id="cart-badge" class="cart-badge" aria-hidden="true" style="font-family:'Roboto', sans-serif;">0</span></a></li>
+                <li><a href="profile.html">Мой профиль</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Основной контент -->
+    <div class="content" id="top">
+        <main>
+            <!-- Секция с приветствием / О нас -->
+            <section  class="center hero" style="font-size: 110%;">
+                <h2>Рады вас видеть в нашем онлайн-магазинчике!</h2>
+                <blockquote>❝Манга — это величайшее достижение японской культуры❞</blockquote>
+                <p>Сюдзин, <cite>из произведения Бакуман</cite></p>
+            </section>
+
+            <!-- Описание сервиса / миссия -->
+            <section class="about">
+                <h2 class="center hero" style="font-size:170%;">О нас</h2>
+                <p>«Лавка Мечтаний» — онлайн-площадка, посвящённая манге и смежной продукции. Наша цель — сделать редкие и интересные издания доступными любителям жанра, помочь с подбором и создать сообщество единомышленников.</p>
+                <p> Мы — небольшая команда энтузиастов, которая собирает лучшие издания, предоставляем актуальную информацию о релизах, новости индустрии и рекомендации по подбору серий для новых читателей.</p>
+            </section>
+
+    <!-- Блок ценностей / услуги -->
+            <section class="services">
+                <h2>Что мы предлагаем</h2>
+                <ul>
+                    <li>Информационные обзоры и рекомендации</li>
+                    <li>Подписка на новости и релизы</li>
+                    <li>Консультации по подбору серий</li>
+                </ul>
+            </section>
+        </main>
+
+        <!-- Боковая панель — новости / контакты -->
+        <aside class="sidebar" role="complementary">
+            <h2>Новинки месяца</h2>
+            <p>Появились новые тома <cite>Атака Титанов</cite> и <cite>Человек-Бензопила</cite>.</p>
+            <p>Ожидают скоро поступления последние тома <cite>Магической битвы</cite> и <cite>Пожирателя лжи</cite>.</p>
+            <p>Доставка томов на языке оригинала из Японии ожидает <cite>Клинок рассекающего демонов</cite> и <cite>Обещанный неверлэнд</cite>.</p>
+
+            <h2>Новости и обновления</h2>
+            <p>Подписка на рассылку позволяет первыми узнавать о новых поступлениях и специальных предложениях.</p>
+            <p>Следите за обновлениями: мы периодически публикуем подборки и обзоры.</p>
+        </aside>
+    </div>
+
+    <!-- Иллюстрация / figure (общая, без привязки к конкретным товарам) -->
+    <div>
+        <!-- Навигационные ссылки -->
+        <h2 id="end" style="margin:20px;">Спасибо, что выбираете нас!</h2>
+        <p class="nav-links" style="margin:20px;">
+            <a href="#top">Перейти к началу страницы</a> 
+        </p>
+    </div>
+
+    <!-- Подвал сайта с контактами и информацией о разработчике -->
+    <footer class="site-footer right" style="margin-top:20px;">
+        <h2>Связь с нами</h2>
+        <address>
+            Телефон: <a href="tel:896742993722">896742993722</a><br>
+            Почта: <a href="mailto:manga-shop@mail.ru">manga-shop@mail.ru</a><br>
+            Разработчик: Ирицян Артур
+        </address>
+    </footer>
+</body>
+</html>
