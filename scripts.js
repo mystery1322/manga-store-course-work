@@ -28,3 +28,26 @@
     if (window.innerWidth > 720 && header.classList.contains('menu-open')) openMenu(false);
   });
 })();
+
+// scripts.js (или вверху cart.js / product.js если общего файла нет)
+// -------------------------
+function loadCart() {
+  try {
+    const raw = localStorage.getItem('cart');
+    const cart = raw ? JSON.parse(raw) : [];
+    return Array.isArray(cart) ? cart : [];
+  } catch (e) {
+    console.warn('loadCart: ошибка при чтении корзины', e);
+    return [];
+  }
+}
+
+function saveCart(cart) {
+  try {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  } catch (e) {
+    console.error('saveCart: ошибка при сохранении корзины', e);
+  }
+}
+// -------------------------
+
