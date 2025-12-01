@@ -2,11 +2,10 @@
 document.addEventListener('DOMContentLoaded', () => {
   const PROD = (window.PRODUCTS && Array.isArray(window.PRODUCTS)) ? window.PRODUCTS : [];
   const CART_KEY = 'manga_cart_v1';
-  const ROTATE_MS = 2500; // <- скорость автолистания: 2500ms = 2.5s
+  const HOVER_ROTATE_MS = 1500; // 1.5s
 
   function loadCart(){ try { return JSON.parse(localStorage.getItem(CART_KEY) || '[]'); } catch(e){ return []; } }
   function saveCart(cart){ localStorage.setItem(CART_KEY, JSON.stringify(cart)); updateCartBadge(); }
-
   function updateCartBadge(){
     const el = document.getElementById('cart-badge');
     if(!el) return;
@@ -16,36 +15,23 @@ document.addEventListener('DOMContentLoaded', () => {
     el.classList.toggle('hidden', count===0);
   }
 
-  let __cardIntervals = []; // все интервалы карточек для очистки
-
   const grid = document.getElementById('catalogGrid');
-  if(!grid) {
-    console.warn('catalog.js: element #catalogGrid not found');
-    return;
-  }
-
-  function clearCardIntervals(){
-    __cardIntervals.forEach(i => clearInterval(i));
-    __cardIntervals = [];
-  }
+  if(!grid) { console.warn('catalog.js: #catalogGrid not found'); return; }
 
   function renderProducts(list){
-    clearCardIntervals();
     grid.innerHTML = '';
-    if(!list || !list.length){
-      grid.innerHTML = '<p class="catalog-empty">Товары не найдены.</p>';
-      return;
-    }
+    if(!list.length){ grid.innerHTML = '<p class="catalog-empty">Товары не найдены.</p>'; return; }
 
-    list.forEach(p=>{
+    list.forEach(p => {
       const art = document.createElement('article');
       art.className = 'product-card';
+      // данные изображений: либо p.images (массив), либо p.img (строка)
+      const imgs = Array.isArray(p.images) && p.images.length ? p.images.slice() : (p.img ? [p.img] : ['images/missing.png']);
 
       art.innerHTML = `
         <a href="product.html?id=${encodeURIComponent(p.id)}" class="product-link" aria-label="${p.title}">
           <div class="card-img-wrap">
-            <img src="${(Array.isArray(p.images) && p.images[0]) ? p.images[0] : (p.img || 'images/missing.png')}" 
-                 alt="${p.title}" class="product-img" loading="lazy">
+            <img src="${imgs[0]}" alt="${p.title}" class="product-img" loading="lazy">
           </div>
           <h3 class="product-title">${p.title}</h3>
           <p class="meta">Автор: ${p.author || '—'}</p>
@@ -57,34 +43,31 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
       grid.appendChild(art);
 
-      // автоперекрутка картинок (и поведение hover -> вернуть к главному при уходе)
-      const imgs = Array.isArray(p.images) && p.images.length ? p.images.slice() : (p.img ? [p.img] : []);
+      // hover behavior: старт/стоп автолистания
       if(imgs.length > 1) {
         const imgEl = art.querySelector('.product-img');
         let idx = 0;
-        let iv = setInterval(()=> {
-          idx = (idx + 1) % imgs.length;
-          imgEl.src = imgs[idx];
-        }, ROTATE_MS);
-        __cardIntervals.push(iv);
+        let iv = null;
 
-        // при наведении — остановим автоперекрутку (чтобы не дергало)
-        art.addEventListener('mouseenter', () => {
-          clearInterval(iv);
-        });
-
-        // при уходе мыши — вернём основное изображение и запустим автоперекрутку заново
-        art.addEventListener('mouseleave', () => {
-          // показываем основное фото
-          idx = 0;
-          imgEl.src = imgs[0];
-          // перезапускаем интервал
-          iv = setInterval(()=> {
+        const start = () => {
+          if(iv) return;
+          iv = setInterval(() => {
             idx = (idx + 1) % imgs.length;
             imgEl.src = imgs[idx];
-          }, ROTATE_MS);
-          __cardIntervals.push(iv);
-        });
+          }, HOVER_ROTATE_MS);
+          art.dataset._rotate = '1';
+        };
+        const stop = () => {
+          if(iv) { clearInterval(iv); iv = null; }
+          idx = 0;
+          imgEl.src = imgs[0]; // возвращаем основную картинку
+          delete art.dataset._rotate;
+        };
+
+        art.addEventListener('mouseenter', start);
+        art.addEventListener('focusin', start); // доступность: keyboard focus
+        art.addEventListener('mouseleave', stop);
+        art.addEventListener('focusout', stop);
       }
     });
   }
@@ -99,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
         id: productId,
         title: prod?.title || ('Товар ' + productId),
         price: prod?.price ?? 0,
-        img: prod?.img || 'images/missing.png',
+        img: prod?.img || (Array.isArray(prod?.images) ? prod.images[0] : 'images/missing.png'),
         author: prod?.author || '',
         qty: Number(qty || 1)
       });
@@ -109,15 +92,14 @@ document.addEventListener('DOMContentLoaded', () => {
     else alert((prod?.title || 'Товар') + ' добавлен в корзину');
   }
 
-  // делегирование кликов: только кнопки добавления
-  document.addEventListener('click', e=>{
+  document.addEventListener('click', e => {
     const btn = e.target.closest('.add-btn');
     if(!btn) return;
-    e.preventDefault(); // чтобы случайный клик по соседней ссылке не сработал
+    e.preventDefault();
     addToCart(btn.dataset.id, 1);
   });
 
-  // фильтры — если есть элементы
+  // фильтры (которые есть на странице)
   function filterAndRender(){
     const q = (document.getElementById('search')?.value || '').trim().toLowerCase();
     const genre = document.getElementById('genreFilter')?.value || 'all';
@@ -147,10 +129,6 @@ document.addEventListener('DOMContentLoaded', () => {
   renderProducts(PROD);
   updateCartBadge();
 
-  // чистка интервалов при переходе/закрытии
-  window.addEventListener('beforeunload', clearCardIntervals);
-
-  // экспорт функций
+  // экспорт
   window.addToCart = addToCart;
-  window.renderProducts = renderProducts;
 });
