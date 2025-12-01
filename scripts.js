@@ -29,8 +29,7 @@
   });
 })();
 
-// scripts.js (или вверху cart.js / product.js если общего файла нет)
-// -------------------------
+
 function loadCart() {
   try {
     const raw = localStorage.getItem('cart');
@@ -49,5 +48,5 @@ function saveCart(cart) {
     console.error('saveCart: ошибка при сохранении корзины', e);
   }
 }
-// -------------------------
+
 
