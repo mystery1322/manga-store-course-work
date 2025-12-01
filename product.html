@@ -1,17 +1,16 @@
-<!DOCTYPE html>
+<!-- product.html -->
+<!doctype html>
 <html lang="ru">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Корзина — Лавка Мечтаний</title>
-
-  <link rel="icon" type="image/png" href="images/fav.png">
-  <link href="style.css" rel="stylesheet">
-  <!-- если хочешь отдельный CSS только для корзины, подключи cart.css -->
-  <link href="cart.css" rel="stylesheet">
+  <title>Товар — Лавка Мечтаний</title>
+  <link rel="icon" href="images/fav.png">
+  <link href="style.css" rel="stylesheet"> <!-- ваш основной -->
+  <link href="product.css" rel="stylesheet"> <!-- страничные правки -->
 </head>
-<body class="page-cart">
-  <!-- — можно использовать ту же шапку, что и на сайте — вставь сюда свой header если нужно -->
+<body class="page-product">
+  <!-- вставь сюда свой header (как на index) -->
   <header id="top" class="site-header">
     <div class="aboba logo-block">
       <a href="index.html" class="logo-link">
@@ -46,23 +45,25 @@
     </nav>
   </header>
 
-  <main style="padding:110px 20px 30px;">
-    <section id="cart-root">
-      <!-- сюда будет рендериться корзина -->
-    </section>
-  </main>
+    <main style="padding:110px 20px 40px;">
+        <div id="product-root" class="product-root"></div>
+    </main>
 
+    <!-- Подвал сайта с контактами и информацией о разработчике -->
+    <footer class="site-footer right" style="margin-top:210px;">
+        <h2>Связь с нами</h2>
+        <address>
+            Телефон: <a href="tel:896742993722">896742993722</a><br>
+            Почта: <a href="mailto:manga-shop@mail.ru">manga-shop@mail.ru</a><br>
+            Разработчик: Ирицян Артур
+        </address>
+    </footer>
+
+  <!-- scripts: сначала общие -->
   <script src="scripts.js" defer></script>
-  <!-- скрипт корзины -->
-  <script src="cart.js" defer></script>
-
-  <footer class="site-footer right" style="margin-top:100px;">
-    <h2>Связь с нами</h2>
-    <address>
-      Телефон: <a href="tel:896742993722">896742993722</a><br>
-      Почта: <a href="mailto:manga-shop@mail.ru">manga-shop@mail.ru</a><br>
-      Разработчик: Ирицян Артур
-    </address>
-  </footer>
+  <!-- данные: если у тебя есть products-data.js в корне -->
+  <script src="products-data.js" defer></script>
+  <!-- логика страницы -->
+  <script src="product.js" defer></script>
 </body>
 </html>

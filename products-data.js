@@ -1,12 +1,21 @@
 // products-data.js — единый источник правды для каталога / product / cart
 window.PRODUCTS = [
-    {
-        id: 'm1',
-        title: 'Манга Влюбленный паразит Том 1 и 2',
-        author: 'Koisuru kiseichuu',
-        price: 1199,
-        img: 'images/parasite1.png',
-        genre: ['seinen']
+  {
+    id: 'm1',
+    title: 'Манга: Влюблённый паразит — Том 1 и 2',
+    author: 'Koisuru kiseichuu',
+    price: 1199,
+    // главное изображение (backward compat)
+    img: 'images/parasite1.png',
+    // массив дополнительных изображений (3-4 штуки)
+    images: [
+        'images/parasite1.png',
+        'images/parasite2.png',
+        'images/parasite3.png',
+        'images/parasite4.png'
+    ],
+    genre: ['seinen'],
+    desc: 'Бла бла бла бле бле бле блу блу блу Бла бла бла бле бле бле блу б'
   },
   {
         id: 'm2',
