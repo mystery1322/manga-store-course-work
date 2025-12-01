@@ -338,3 +338,18 @@ aside.catalog-filters {
 /* кнопки prev/next в product page */
 .gallery-controls { display:flex; gap:8px; align-items:center; margin-left:12px; }
 .gallery-controls button { padding:6px 10px; }
+
+/* Убирает подчёркивание ссылок карточек и приводит заголовок/текст в порядок */
+.product-link { text-decoration: none; color: inherit; display: block; }
+.product-link:hover, .product-link:focus { text-decoration: none; color: inherit; }
+.product-link * { text-decoration: none; }
+
+/* Немного улучшает картинку карточки (плавность) */
+.card-img-wrap { width: 100%; overflow: hidden; border-radius: 6px; }
+.product-img { width: 100%; height: auto; display: block; object-fit: cover; aspect-ratio: 3/4; transition: opacity .18s ease; }
+
+/* Защититься от того, что декоративные блоки перехватывают клики */
+.header-center { pointer-events: none; } /* только если header-center иногда накрывает карточки — проверь результат */
+
+/* Если подчеркивание видно из-за user-agent, явный reset: */
+a { -webkit-text-decoration: none; text-decoration: none; }
