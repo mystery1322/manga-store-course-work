@@ -2,7 +2,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   const PROD = (window.PRODUCTS && Array.isArray(window.PRODUCTS)) ? window.PRODUCTS : [];
   const CART_KEY = 'manga_cart_v1';
-  const HOVER_ROTATE_MS = 900; // 1.5s
+  const HOVER_ROTATE_MS = 750; 
 
   function loadCart(){ try { return JSON.parse(localStorage.getItem(CART_KEY) || '[]'); } catch(e){ return []; } }
   function saveCart(cart){ localStorage.setItem(CART_KEY, JSON.stringify(cart)); updateCartBadge(); }

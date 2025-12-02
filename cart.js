@@ -144,10 +144,12 @@
       topRow.style.justifyContent = 'space-between';
       topRow.style.alignItems = 'flex-start';
       topRow.style.gap = '8px';
+      topRow.style.marginTop = '5px';
 
       const info = document.createElement('div');
       const titleStrong = document.createElement('strong');
       titleStrong.style.display = 'block';
+      titleStrong.style.color = '#2A1365';
       titleStrong.textContent = item.title || 'Без названия';
       info.appendChild(titleStrong);
 
@@ -177,7 +179,7 @@
       const bottomRow = document.createElement('div');
       bottomRow.style.display = 'flex';
       bottomRow.style.justifyContent = 'space-between';
-      bottomRow.style.alignItems = 'center';
+      bottomRow.style.alignItems = 'end';
       bottomRow.style.marginTop = '12px';
       bottomRow.style.gap = '12px';
 
@@ -188,7 +190,7 @@
       label.style.fontSize = '0.9rem';
       label.style.color = '#444';
       label.style.marginBottom = '6px';
-      label.textContent = 'Количество';
+      label.textContent = 'Количество:';
       qtyWrap.appendChild(label);
 
       const input = document.createElement('input');
@@ -206,8 +208,8 @@
       priceWrap.style.textAlign = 'right';
       const priceDiv = document.createElement('div');
       priceDiv.style.fontWeight = '800';
-      priceDiv.style.color = '#0a7a0a';
-      priceDiv.style.fontSize = '1.05rem';
+      priceDiv.style.color = '#248e24ff';
+      priceDiv.style.fontSize = '1rem';
       priceDiv.textContent = formatPrice(lineTotal);
       priceWrap.appendChild(priceDiv);
       bottomRow.appendChild(priceWrap);
@@ -223,14 +225,14 @@
     const total = cart.reduce((s, p) => s + (Number(p.price || 0) * Number(p.qty || 0)), 0);
     const summary = document.createElement('div');
     summary.className = 'cart-summary';
-    summary.style.marginTop = '14px';
+    summary.style.marginTop = '20px';
     summary.style.display = 'flex';
     summary.style.justifyContent = 'space-between';
     summary.style.alignItems = 'center';
 
     const totalDiv = document.createElement('div');
     totalDiv.style.fontWeight = '700';
-    totalDiv.innerHTML = `Итого: <span class="cart-total">${formatPrice(total)}</span>`;
+    totalDiv.innerHTML = `<strong >Итого: <span class="cart-total">${formatPrice(total)}</span></strong>`;
     summary.appendChild(totalDiv);
 
     const checkoutWrap = document.createElement('div');

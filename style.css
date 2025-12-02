@@ -1,11 +1,3 @@
-/* ===================================================================
-   style.css — финальная версия без правил каталога (catalog.css берёт на себя каталог-специфику)
-   Сохранено: глобальные стили, header, nav, общие утилиты и медиаправила для header/menu.
-   Каталог-специфичные правила удалены: .catalog-wrapper, .catalog-filters, .product-grid,
-   .product-card, .filter-group, .search-input, .select, .catalog-empty и связанные мобильные правила.
-   =================================================================== */
-
-/* ---------------------- 1. GLOBAL / RESET / TYPOGRAPHY ---------------------- */
 * { box-sizing: border-box; }
 
 body {
@@ -20,6 +12,7 @@ body {
 /* Заголовки (используются повсеместно) */
 h1 { color: rgb(31, 31, 139); margin: 0; font-size: 22px; }
 h2 { color: rgb(139, 0, 60); margin: 0 0 8px 0; }
+h3 { color: 2a1365; margin: 0; margin-top: 10px;}
 
 /* Утилиты общего пользования */
 .center { text-align: center; }
@@ -151,7 +144,7 @@ main {
   background: #d6ecf5;
   position: sticky;
   top: 118px;
-  margin-left: 15px;
+  margin-left: 10px;
   margin-bottom: 8px;
   height: fit-content;
 }
@@ -190,7 +183,7 @@ section, figure {
 .hero { text-align: center; }
 
 /* Утилиты для титулов/мета */
-.price { color: #0a7a0a; font-weight: 700; }
+.price { color: #0a7a0a; font-weight:800; }
 
 /* Красный бейдж корзины — используется в header и catalog */ 
 .cart-badge {
@@ -334,7 +327,9 @@ section, figure {
     flex: none;
     position: static;   /* снимаем sticky, чтобы он не прилипал в колонке */
     top: auto;
-    margin-top: 0;
+    margin-right: 25px;
+    margin-left: 1px;
+
   }
 
   /* если используется .catalog-filters или другой aside-класс — тоже отключаем sticky */
@@ -368,6 +363,6 @@ section, figure {
 
 /* ---- цвета: единообразно ---- */
 .site-title, .site-header h1, .site-header .site-title { color: var(--brand-blue); }
-.product-title, .product-card .meta, .product-card p, .product-detail h1, .page-cart h2 { color: var(--brand-blue); font-weight:700; }
+.product-title, .product-card .meta, .product-card p, .product-detail h1  { color: var(--brand-blue); font-weight:700; }
 
 

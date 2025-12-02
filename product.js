@@ -144,13 +144,13 @@
         </div>
 
         <div class="product-info">
-          <h1 class="product-title" style="margin-top:0;color:var(--brand-blue, #1f1f8b)">${escapeHtml(item.title)}</h1>
-          <p class="meta" style="margin:8px 0;color:#666">Автор: ${escapeHtml(item.author || '—')}</p>
+          <h1 class="product-title" style="margin-top:5px;color:var(--brand-blue, #1f1f8b)">${escapeHtml(item.title)}</h1>
+          <p class="meta" style="margin:8px 0;"><strong>Автор: </strong>${escapeHtml(item.author || '—')}</p>
           <p class="meta" style="margin:6px 0 12px;color:#444"><strong>Жанры:</strong> ${Array.isArray(item.genre) ? item.genre.map(g=>escapeHtml(g)).join(', ') : escapeHtml(item.genre || '—')}</p>
           <p class="desc" style="margin:8px 0 20px;color:#333;line-height:1.45">${escapeHtml(item.desc || 'Описание отсутствует.')}</p>
 
           <div style="display:flex;gap:12px;align-items:center;margin-top:18px;">
-            <div class="price" style="font-size:1.4rem;font-weight:800;color:var(--brand-blue, #1f1f8b)">${formatPrice(item.price)}</div>
+            <div class="price" style="font-size:1.4rem;font-weight:800;color:var(--brand-blue, #248e24)">${formatPrice(item.price)}</div>
             <div>
               <button id="addToCartBtn" class="btn" type="button">Добавить в корзину</button>
             </div>

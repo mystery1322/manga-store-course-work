@@ -78,7 +78,6 @@ aside.catalog-filters {
 
 /* Мета и цена внутри карточки */
 .product-card .meta { font-size: 0.9rem; color: #555; margin: 0; }
-.product-card .price { color: #0a7a0a; font-weight: 700; margin: 0; }
 
 /* Кнопки в карточке (используют общий .btn из style.css) */
 .product-card .btn { width: auto; }
@@ -175,8 +174,8 @@ aside.catalog-filters {
 
 .product-footer .price {
   margin: 0;
-  font-weight: 800;
-  color: #0a7a0a;
+  font-size: 115%;
+  color: #226c22;
 }
 
 /* кнопка */

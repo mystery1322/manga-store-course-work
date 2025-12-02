@@ -33,7 +33,7 @@
 .product-card .price,
 .card .price,
 .price {
-  color: #0a7a0a !important;
+  color: #248E24 !important;
   font-weight: 600;
 }
 
@@ -50,7 +50,7 @@
 /* Мобильный верх — показываем на узких экранах, скрыт на десктопе */
 .mobile-top { display: none; margin-bottom: 12px; }
 .mobile-top .product-title-mobile { font-size: 1.25rem; margin: 0 0 8px 0; color: var(--brand-blue, #1f1f8b); font-weight: 800; }
-.mobile-top .price-mobile { font-weight: 800; font-size: 1.2rem; color: #0a7a0a; }
+.mobile-top .price-mobile { font-weight: 800; font-size: 1.2rem; color: #248E24; }
 
 /* На мобильных показываем мобильный верх и скрываем дублирующий заголовок из product-info */
 @media (max-width: 720px) {
