@@ -1,3 +1,4 @@
+
 (function () {
   'use strict';
 
@@ -134,11 +135,11 @@
     wrapper.innerHTML = `
       <div class="product-grid-detail" style="gap:24px;display:grid;grid-template-columns:420px 1fr;align-items:start;">
         <div class="product-gallery" aria-label="Галерея товара">
-          <button class="gallery-arrow prev" aria-label="Предыдущее" type="button">‹</button>
-          <div class="gallery-main" style="border:1px solid #eee;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:8px;background:#fff;">
+          <button class="gallery-arrow prev" aria-label="Предыдущее" type="button"></button>          <div class="gallery-main" style="border:1px solid #eee;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:8px;background:#fff;">
             <img src="${images[0]}" alt="${escapeHtml(item.title)}" class="gallery-current" style="width:100%;height:auto;object-fit:cover;max-height:720px;display:block;">
           </div>
-          <button class="gallery-arrow next" aria-label="Следующее" type="button">›</button>
+
+          <button class="gallery-arrow next" aria-label="Следующее" type="button"></button>
           <div class="gallery-thumbs" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;"></div>
         </div>
 
@@ -220,22 +221,30 @@
     // Add to cart handler
     const addBtn = document.getElementById('addToCartBtn');
     addBtn.addEventListener('click', () => {
-      if (typeof window.addToCart === 'function') {
+    if (typeof window.addToCart === 'function') {
         try {
-          window.addToCart(item.id, 1);
+        window.addToCart(item.id, 1);
         } catch (e) {
-          // fallback to local
-          addToCartFallback(item, 1);
-        }
-      } else {
+        // fallback to local
         addToCartFallback(item, 1);
-      }
-      if (typeof window.showToast === 'function') {
-        try { window.showToast(item.title + ' добавлен в корзину', 'success', 1800); } catch (e) { showToast(item.title + ' добавлен в корзину', 'success', 1800); }
-      } else {
+        // show toast for fallback
+        if (typeof window.showToast === 'function') {
+            try { window.showToast(item.title + ' добавлен в корзину', 'success', 1800); } catch(e){ showToast(item.title + ' добавлен в корзину', 'success', 1800); }
+        } else {
+            showToast(item.title + ' добавлен в корзину', 'success', 1400);
+        }
+        }
+    } else {
+        // no global addToCart -> fallback + toast
+        addToCartFallback(item, 1);
+        if (typeof window.showToast === 'function') {
+        try { window.showToast(item.title + ' добавлен в корзину', 'success', 1800); } catch(e){ showToast(item.title + ' добавлен в корзину', 'success', 1800); }
+        } else {
         showToast(item.title + ' добавлен в корзину', 'success', 1400);
-      }
+        }
+    }
     });
+
   }
 
   /* ----------------------- Escape helper for texts inserted into HTML ----------------------- */
@@ -289,4 +298,5 @@
     setTimeout(init, 0);
   }
 
+  
 })();

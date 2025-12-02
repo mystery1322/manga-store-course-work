@@ -5,3 +5,83 @@
 .product-meta { color:#666; margin:6px 0; }
 .btn { cursor:pointer; }
 .cart-badge.hidden { display:none; }
+
+/* мастер-правило для цен в карточках */
+.product-card .price,
+.card .price,
+.price {
+  color: #0a7a0a !important; /* яркий зелёный; можно заменить на #28a745 или другой */
+  font-weight: 600;
+}
+
+/* прячем стрелки / кнопки смены фото в карточке */
+.product-card .photo-switch,
+.product-card .photo-switch-btn,
+.product-gallery .thumb-controls {
+  display: none !important;
+}
+
+/* product.css — простая локальная стилизация */
+.product-root { max-width:1100px; margin:0 auto; }
+.product-detail img { width:100%; height:auto; border-radius:8px; object-fit:cover; }
+.product-detail h1 { margin:0 0 8px 0; font-size:1.6rem; color:#2a1365; }
+.product-meta { color:#666; margin:6px 0; }
+.btn { cursor:pointer; }
+.cart-badge.hidden { display:none; }
+
+/* мастер-правило для цен в карточках */
+.product-card .price,
+.card .price,
+.price {
+  color: #0a7a0a !important;
+  font-weight: 600;
+}
+
+/* прячем стрелки / кнопки смены фото в карточке */
+.product-card .photo-switch,
+.product-card .photo-switch-btn,
+.product-gallery .thumb-controls {
+  display: none !important;
+}
+
+/* Скрываем круглые стрелки на product page (если они создаются скриптом) */
+.gallery-arrow { display: none !important; }
+
+/* Мобильный верх — показываем на узких экранах, скрыт на десктопе */
+.mobile-top { display: none; margin-bottom: 12px; }
+.mobile-top .product-title-mobile { font-size: 1.25rem; margin: 0 0 8px 0; color: var(--brand-blue, #1f1f8b); font-weight: 800; }
+.mobile-top .price-mobile { font-weight: 800; font-size: 1.2rem; color: #0a7a0a; }
+
+/* На мобильных показываем мобильный верх и скрываем дублирующий заголовок из product-info */
+@media (max-width: 720px) {
+  .mobile-top { display: block; }
+  .product-info .product-title { display: none; }
+  .product-grid-detail { grid-template-columns: 1fr; gap: 18px; }
+  .gallery-thumbs { overflow-x: auto; display: flex; }
+}
+/* Блок картинки в карточке товара — как в каталоге */
+.gallery-main {
+  aspect-ratio: 3/4;
+  width: 100%;
+  height: 310px;              /* как в каталоге */
+  border-radius: 14px;        /* как в каталоге */
+  overflow: hidden;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #eee;
+}
+
+/* Картинка внутри — ведёт себя как в каталоге */
+.gallery-main img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;          /* главное — как в каталоге */
+  display: block;
+  border-radius: 14px;
+  transition: opacity 0.18s ease;
+}
+
+/* ---- product page gallery ---- */
+.product-gallery { position:relative; display:flex; flex-direction:column; gap:12px; align-items:center; }

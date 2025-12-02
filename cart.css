@@ -331,3 +331,91 @@
   .qty-input { width:64px; }
 }
 
+/* cart.css — стили для страницы корзины, кнопок-иконок и toast */
+
+/* ===== БАЗА / КОНТЕЙНЕР ===== */
+:root {
+  --accent: #2a1365;
+  --muted: #6b6b6b;
+  --success: #0a7a0a;
+  --danger: #c0392b;
+  --card-bg: #fbfdff;
+  --card-border: #eef3f7;
+  --shadow: 0 12px 30px rgba(10,10,20,0.06);
+}
+
+/* ... (остальной прежний код) ... */
+
+/* Изображение */
+.cart-item img,
+.cart-img {
+  /* фиксированный контейнер с aspect-ratio — как в каталоге */
+  width: 110px;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+  background: #fff;
+  border: 1px solid #eee;
+}
+
+/* если в DOM где-то остались inline-стили с меньшим размером — переопределяем */
+.cart-item img[style] { width: 110px !important; height: auto !important; }
+
+/* Мета-информация */
+.cart-item .meta { display:flex; flex-direction:column; gap:6px; }
+.cart-item .meta h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  /* используем тот же синий что в основном style.css (fallback если переменная не определена) */
+  color: var(--brand-blue, #1f1f8b);
+}
+
+/* Цена */
+.cart-item .price {
+  color: var(--success);
+  font-weight: 700;
+  margin-top: 6px;
+}
+
+/* Остальной код остается прежним... */
+
+/* Небольшая полировка */
+.cart-item + .cart-item { margin-top: 6px; }
+
+/* cart.css additions */
+.cart-list { padding: 0; margin: 0; }
+
+.qty-input {
+  width: 84px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+/* стили для "Удалить" кнопки */
+.remove-item {
+  background: transparent;
+  border: none;
+  color: #c0392b;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* кнопка очистки корзины (чтобы отличалась) */
+.btn-danger {
+  background: #ff4d4f;
+  color: #fff;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Немного стили для адаптивности */
+@media (max-width: 700px) {
+  .cart-item { flex-direction: row; gap:10px; }
+  .cart-item img { width:72px; aspect-ratio:3/4; height:auto; }
+  .qty-input { width:64px; }
+}

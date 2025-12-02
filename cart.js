@@ -130,12 +130,9 @@
       li.style.background = '#fff';
 
       const img = document.createElement('img');
+      img.className = 'cart-img';
       img.src = item.img ? String(item.img) : 'images/missing.png';
       img.alt = item.title ? String(item.title) : '';
-      img.style.width = '84px';
-      img.style.height = '112px';
-      img.style.objectFit = 'cover';
-      img.style.borderRadius = '6px';
       li.appendChild(img);
 
       const content = document.createElement('div');
@@ -200,10 +197,6 @@
       input.min = '1';
       input.value = String(item.qty || 1);
       input.setAttribute('aria-label', `Количество ${item.title || ''}`);
-      input.style.width = '84px';
-      input.style.padding = '6px';
-      input.style.borderRadius = '6px';
-      input.style.border = '1px solid #ccc';
       qtyWrap.appendChild(input);
 
       bottomRow.appendChild(qtyWrap);

@@ -1,4 +1,9 @@
 // scripts.js
+// гарантируем, что бейдж обновится при загрузке любой страницы
+document.addEventListener('DOMContentLoaded', () => {
+  try { updateCartBadge(); } catch(e) { /* safe */ }
+});
+
 (function(){
   const burger = document.getElementById('burgerBtn');
   const header = document.querySelector('.site-header');
