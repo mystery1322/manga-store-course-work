@@ -34,31 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 })();
 
-
-
-
-
-
-function loadCart() {
-  try {
-    const raw = localStorage.getItem('cart');
-    const cart = raw ? JSON.parse(raw) : [];
-    return Array.isArray(cart) ? cart : [];
-  } catch (e) {
-    console.warn('loadCart: ошибка при чтении корзины', e);
-    return [];
-  }
-}
-
-function saveCart(cart) {
-  try {
-    localStorage.setItem('cart', JSON.stringify(cart));
-  } catch (e) {
-    console.error('saveCart: ошибка при сохранении корзины', e);
-  }
-}
-
-
 /* Global helpers: priceFormatter, loadScript, toast, cart helpers, addToCart */
 const priceFormatter = new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB', maximumFractionDigits: 2 });
 
@@ -105,79 +80,6 @@ function showToast(msg, type = 'info', ms = 2000){
     item.style.transform = 'translateY(8px)';
     setTimeout(()=> item.remove(), 220);
   }, ms);
-}
-
-/* CART helpers */
-const CART_KEY = 'manga_cart_v1';
-
-function loadCart(){
-  try { return JSON.parse(localStorage.getItem(CART_KEY) || '[]'); }
-  catch(e){ return []; }
-}
-function saveCart(cart){
-  localStorage.setItem(CART_KEY, JSON.stringify(cart));
-  updateCartBadge();
-}
-function updateCartBadge(){
-  const el = document.getElementById('cart-badge');
-  if(!el) return;
-  const count = loadCart().reduce((s,i)=>s+(i.qty||0), 0);
-  el.textContent = count || 0;
-  el.classList.toggle('hidden', count === 0);
-}
-
-/* addToCart by id (looks up window.PRODUCTS if available) */
-async function addToCart(productId, qty = 1){
-  let prod = null;
-  if(window.PRODUCTS && Array.isArray(window.PRODUCTS)){
-    prod = window.PRODUCTS.find(p => p.id === productId);
-  }
-  // if not found, try to load products-data.js from common location
-  if(!prod){
-    try {
-      await loadScript('products-data.js'); // adjust path if you store it in /scripts/
-      if(window.PRODUCTS) prod = window.PRODUCTS.find(p => p.id === productId);
-    } catch(e){
-      // ignore - we'll add a minimal item
-    }
-  }
-
-  const cart = loadCart();
-  const existing = cart.find(i => i.id === productId);
-  if(existing) existing.qty = (existing.qty || 0) + Number(qty || 1);
-  else {
-    const item = {
-      id: productId,
-      title: prod ? prod.title : ('Товар ' + productId),
-      price: prod && prod.price !== undefined ? prod.price : 0,
-      img: prod && prod.img ? prod.img : 'images/missing.png',
-      author: prod && prod.author ? prod.author : '',
-      qty: Number(qty || 1)
-    };
-    cart.push(item);
-  }
-  saveCart(cart);
-  showToast((prod && prod.title ? prod.title : 'Товар') + ' добавлен в корзину', 'success', 1200);
-}
-
-/* optional: addToCart with full product object */
-function addToCartFromData(productObj, qty = 1){
-  if(!productObj || !productObj.id) return;
-  const cart = loadCart();
-  const existing = cart.find(i => i.id === productObj.id);
-  if(existing) existing.qty = (existing.qty || 0) + Number(qty || 1);
-  else {
-    cart.push({
-      id: productObj.id,
-      title: productObj.title || 'Товар',
-      price: productObj.price || 0,
-      img: productObj.img || 'images/missing.png',
-      author: productObj.author || '',
-      qty: Number(qty || 1)
-    });
-  }
-  saveCart(cart);
-  showToast((productObj.title || 'Товар') + ' добавлен в корзину', 'success', 1200);
 }
 
 /* export to window for pages */
