@@ -82,6 +82,109 @@
   border-radius: 14px;
   transition: opacity 0.18s ease;
 }
+.main-box{
+  padding:140px 20px 40px;
+}
 
 /* ---- product page gallery ---- */
 .product-gallery { position:relative; display:flex; flex-direction:column; gap:12px; align-items:center; }
+
+/* === product responsive tweaks — mobile: column layout, title first === */
+/* Поместить в конец style.css или в отдельный product.css (подключать на product.html) */
+
+@media (max-width: 900px) {
+  .main-box{
+    padding: 85px 20px 40px;
+  }
+  /* Переключаем сетку в простую колонку */
+  .product-detail .product-grid-detail {
+    display: flex !important;
+    flex-direction: column;
+    gap: 14px;
+    align-items: stretch;
+  }
+
+  /* Делаем информацию (где заголовок, автор, описание) первой */
+  .product-detail .product-info { order: 2; padding: 0 6px;}
+
+  /* Галерея идёт после title/info */
+  .product-detail .product-gallery { order: 1; width: 100%; padding: 0 6px; margin-bottom: 15px;}
+
+  /* Снижаем высоту главного изображения, чтобы не «раздавливало» текст */
+  .product-detail .gallery-current {
+    max-height: 420px;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+
+  /* Стрелки галереи деликатнее — чтобы не мешали */
+  .product-detail .gallery-arrow {
+    font-size: 20px;
+    padding: 6px 10px;
+    position: relative;
+    top: 0;
+    margin: 8px 6px;
+  }
+
+  /* Миниатюры — горизонтальный список под главным изображением */
+  .product-detail .gallery-thumbs {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 6px;
+  }
+  .product-detail .gallery-thumbs .thumb-btn img {
+    width: 64px;
+    height: 88px;
+    object-fit: cover;
+  }
+
+  /* Текст: заголовок и другие данные более компактные */
+  .product-detail .product-title {
+    font-size: 1.2rem !important; /* не дать стать слишком большим */
+    line-height: 1.05 !important;  /* плотнее строки, чтобы не было большого расстояния */
+    margin-bottom: 8px;
+    color: var(--brand-blue, #1f1f8b) !important; /* синий как в хедере */
+    display: block;
+    word-break: normal;
+  }
+  .product-detail .product-info .meta,
+  .product-detail .product-info .desc {
+    font-size: 0.95rem;
+  }
+
+  /* Цена и кнопка остаются внизу блока информации */
+  .product-detail .product-info .price {
+    font-size: 1.25rem;
+    color: var(--brand-blue, #1f1f8b);
+  }
+  .product-detail .product-info .btn {
+    margin-left: 6px;
+  }
+
+  /* Уменьшаем отступ content, если фиксированная шапка перекрывает : */
+  .content, main {
+    padding-top: 90px; /* если нужно, подкорректируй — зависит от header */
+  }
+
+  /* Обеспечиваем, что заголовок не перекрывается и видим */
+  .product-detail .product-title {
+    z-index: 1;
+  }
+}
+
+/* Дополнительная страховка: если где-то меню/гамбургер скрывает элементы, даём title приоритет */
+.page-product .product-detail .product-title {
+  /* явный цвет и видимость — если правила перекрывают, это даст приоритет */
+  color: var(--brand-blue, #1f1f8b) !important;
+  display: block !important;
+}
+
+/* Если заголовок всё ещё «отсекался» из-за overflow — добавляем правило */
+.product-detail, .product-detail * {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+}
