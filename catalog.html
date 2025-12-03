@@ -111,8 +111,57 @@
       <div style="font-size:13px;color:#666;margin-bottom:38px;"></div>
     </aside>
   </div>
+<button id="scrollToTop" style="
+    position: fixed;
+    width: 75px;
+    height: 60px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    z-index: 1000;
+    display: none;
+    bottom: 50px;
+    left: 50px;
+    padding: 0;
+    margin-bottom: 50px;
+">
+    <img src="images/mewo-omori.gif" 
+        alt="Наверх" 
+        style="width: 105%; height: 105%; object-fit: cover; border-radius: 20%;">
+</button>
 
-  <footer class="site-footer right" style="margin-top:200px;">
+<style>
+  /* Телефон: справа */
+  @media (max-width: 699px) {
+    #scrollToTop {
+      left: auto !important;
+      right: 20px !important;
+      bottom: 90px !important;
+    }
+  }
+  
+  /* Большие экраны: еще левее */
+  @media (min-width: 1200px) {
+    #scrollToTop {
+      left: 50px !important;
+      bottom: 90px !important;
+    }
+  }
+
+</style>  
+
+<script>
+  const scrollBtn = document.getElementById('scrollToTop');
+  
+  window.addEventListener('scroll', () => {
+    scrollBtn.style.display = window.scrollY > 250 ? 'block' : 'none';
+  });
+  
+  scrollBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+  </script>
+  <footer class="site-footer right" style="margin-top:50px;">
     <h2>Связь с нами</h2>
     <address>
       Телефон: <a href="tel:896742993722">896742993722</a><br>

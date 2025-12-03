@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Профиль — Лавка Мечтаний</title>
+  <link rel="icon" type="image/png" href="images/fav.png">
+  <link href="style.css" rel="stylesheet">
+  <link href="profile.css" rel="stylesheet">
+</head>
+<body>
+    <header  class="site-header">
+        <div class="logo-block">
+            <a href="index.html" class="logo-link">
+                <img src="images/logo.png" alt="Логотип" width="79" class="site-logo">
+                <h1 class="site-title">Лавка Мечтаний✨</h1>
+            </a>
+        </div>
+    
+        <button id="burgerBtn" class="burger icon-btn" aria-label="Открыть меню" aria-expanded="false" aria-controls="mainNav">
+        ☰
+        </button>
+        <!-- новая центральная гифка -->
+        <div class="header-center">
+            <img src="images/bts-cats-cat.gif" alt="" aria-hidden="true" class="header-gif">
+            <img src="images/bts-cats-cat.gif" alt="" aria-hidden="true" class="header-gif">
+            <img src="images/bts-cats-cat.gif" alt="" aria-hidden="true" class="header-gif">
+            <img src="images/bts-cats-cat.gif" alt="" aria-hidden="true" class="header-gif">
+            <img src="images/bts-cats-cat.gif" alt="" aria-hidden="true" class="header-gif">
+            <img src="images/bts-cats-cat.gif" alt="" aria-hidden="true" class="header-gif">
+            <img src="images/bts-cats-cat.gif" alt="" aria-hidden="true" class="header-gif">
+            <img src="images/bts-cats-cat.gif" alt="" aria-hidden="true" class="header-gif">
+
+            <!-- если гиф информативна, поставь осмысленный alt вместо пустого -->
+        </div>
+
+        <nav class="main-nav" aria-label="Главное меню">
+            <ul>
+                <li><a href="index.html"><span class="no-wrap">✨О нас</span></a></li>
+                <li><a href="catalog.html" class="active">Каталог</a></li>
+                <li><a href="cart.html">Корзина <span id="cart-badge" class="cart-badge" aria-hidden="true" style="font-family:'Roboto', sans-serif;">0</span></a></li>
+                <li><a href="profile.html">Мой профиль</a></li>
+            </ul>
+        </nav>
+    </header>
+  
+  <div class="profile-container">
+    <h2 style="text-align: center; margin-bottom: 30px; color: #2A1365;">Вход в аккаунт</h2>
+    
+    <div class="form-toggle">
+      <button id="loginBtn" class="active">Войти</button>
+      <button id="registerBtn">Регистрация</button>
+    </div>
+    
+    <form id="authForm">
+      <div id="formFields">
+        <div class="form-group">
+          <input type="email" id="email" placeholder="Email" required>
+        </div>
+        <div class="form-group">
+          <input type="password" id="password" placeholder="Пароль" required>
+        </div>
+      </div>
+      
+      <div id="captchaSection" style="display: none;">
+        <div class="captcha" id="captchaCode">ABC123</div>
+        <div class="form-group">
+          <input type="text" id="captchaInput" placeholder="Введите код с картинки">
+        </div>
+      </div>
+      
+      <button type="submit" id="submitBtn" class="submit-btn">Войти</button>
+    </form>
+  </div>
+    <script src="profile.js" defer></script>
+    <script src="scripts.js" defer></script>
+</body>
+</html>

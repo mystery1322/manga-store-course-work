@@ -52,6 +52,7 @@ aside.catalog-filters {
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 18px;
   align-items: start;
+  margin-bottom: 141px;
 }
 
 /* Карточка товара */
@@ -80,7 +81,7 @@ aside.catalog-filters {
 .product-card .meta { font-size: 0.9rem; color: #555; margin: 0; }
 
 /* Кнопки в карточке (используют общий .btn из style.css) */
-.product-card .btn { width: auto; }
+.product-card .btn { width: auto; margin-top: 5px;}
 
 /* Если захочешь бейдж в карточке (опционально) */
 .product-card .product-badge {

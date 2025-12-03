@@ -35,6 +35,10 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 
 
+
+
+
+
 function loadCart() {
   try {
     const raw = localStorage.getItem('cart');

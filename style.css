@@ -147,6 +147,7 @@ main {
   margin-left: 10px;
   margin-bottom: 8px;
   height: fit-content;
+  border-radius: 6px;
 }
 
 /* Подвал (общий) */
@@ -163,6 +164,7 @@ section, figure {
   padding: 10px;
   margin: 8px 0;
   background-color: #fafafa;
+  border-radius: 6px;
 }
 
 /* Кнопки */
