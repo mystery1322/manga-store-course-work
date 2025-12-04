@@ -161,7 +161,7 @@ main {
 /* Общие карточные/блочные правила */
 section, figure {
   border: 1px solid gray;
-  padding: 10px;
+  padding: 15px;
   margin: 8px 0;
   background-color: #fafafa;
   border-radius: 6px;
@@ -382,10 +382,10 @@ section, figure {
 /* ---- pricing explanation ---- */
 .pricing-explanation {
     background: linear-gradient(135deg, #f8f9ff 0%, #f0f2ff 100%);
-    padding: 30px;
+    padding: 20px;
     border-radius: 12px;
-    margin: 30px 0;
-    border: 1px solid #e6e8ff;
+    margin: 10px 0;
+    border: 1px solid #000000;
 }
 
 .explanation-content {
