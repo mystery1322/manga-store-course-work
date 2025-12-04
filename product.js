@@ -22,6 +22,7 @@
   function safeGetProducts() {
     return (window.PRODUCTS && Array.isArray(window.PRODUCTS)) ? window.PRODUCTS : null;
   }
+  
   // Обновляем бейдж при загрузке
   updateCartBadge();
  
