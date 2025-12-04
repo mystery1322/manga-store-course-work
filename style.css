@@ -178,9 +178,6 @@ section, figure {
 }
 
 /* ---------------------- 4. SHARED COMPONENTS / MICRO-UTILS ---------------------- */
-.catalog-list { padding-left: 18px; }
-.feature-figure { border: 1px solid #ccc; padding: 8px; margin: 20px; background: #fff; }
-
 /* Центровка / hero */
 .hero { text-align: center; }
 
@@ -202,37 +199,10 @@ section, figure {
   margin-left: 8px;
   vertical-align: middle;
   box-shadow: 0 1px 0 rgba(0,0,0,0.15);
+  font-family: 'Roboto', sans-serif !important;
+  font-weight: 700;
 }
 .cart-badge.hidden { display: none; }
-
-/* ---------------------- 5. OPTIONAL / RARELY-USED (в самом низу) ---------------------- */
-/* Абсолютный бейдж в карточке — оставлен как утилита (не удалял, т.к. может понадобиться) */
-.product-badge {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  background: #ffb703;
-  padding: 4px 8px;
-  font-size: 12px;
-  border-radius: 4px;
-}
-
-/* Бейдж поверх логотипа (возможно не используется) */
-.logo-badge {
-  position: absolute;
-  top: -6px;
-  left: 60px;
-  background: crimson;
-  color: #fff;
-  padding: 2px 6px;
-  font-size: 12px;
-  border-radius: 4px;
-}
-
-/* Float-утилиты (если понадобятся) */
-.float-left { float: left; width: 160px; margin: 0 16px 12px 0; }
-.float-right { float: right; width: 160px; margin: 0 0 12px 16px; }
-.float-examples::after { content: ""; display: table; clear: both; }
 
 /* ---------------------- 6. ADAPTIVE / MEDIA QUERIES (header/menu focused) ---------------------- */
 /* Упрощённые медиаправила для header/gif/menu — каталожные медиаправила вынесены в catalog.css */
@@ -354,10 +324,6 @@ section, figure {
   .burger { display: inline-flex !important; }
 }
 
-  /* Скрыть мигающий курсор везде, кроме input/textarea/contenteditable */
-*:not(input):not(textarea):not([contenteditable="true"]) {
-  caret-color: transparent !important;
-}
 
 :root {
   --brand-blue: #2A1365; /* твой синий = rgb(31,31,139) */
@@ -368,3 +334,146 @@ section, figure {
 .product-title, .product-card .meta, .product-card p, .product-detail h1  { color: var(--brand-blue); font-weight:700; }
 
 
+/* ---- advantages ---- */
+.advantages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+}
+
+/* ---- community ---- */
+.community ul {
+    padding-left: 20px;
+}
+
+.community li {
+    margin: 8px 0;
+    color: #444;
+}
+
+/* ---- advantages ---- */
+.advantages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.advantage {
+    border: 1px solid #e0e0e0;
+    padding: 20px;
+    border-radius: 8px;
+    background: #f9f9ff;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.advantage:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(42, 19, 101, 0.1);
+}
+
+.advantage h3 {
+    color: #2A1365;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+/* ---- pricing explanation ---- */
+.pricing-explanation {
+    background: linear-gradient(135deg, #f8f9ff 0%, #f0f2ff 100%);
+    padding: 30px;
+    border-radius: 12px;
+    margin: 30px 0;
+    border: 1px solid #e6e8ff;
+}
+
+.explanation-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    align-items: center;
+}
+
+.explanation-text ul {
+    padding-left: 20px;
+    margin: 15px 0;
+}
+
+.explanation-text li {
+    margin: 10px 0;
+    color: #444;
+}
+
+.price-comparison {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.price-option {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #e0e0e0;
+    text-align: center;
+    flex: 1;
+}
+
+.price-option.highlighted {
+    border-color: #2A1365;
+    background: #2A1365;
+    color: white;
+}
+
+.price-old {
+    text-decoration: line-through;
+    color: #999;
+    font-size: 1.1rem;
+}
+
+.price-new {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+.price-option.highlighted .price-new {
+    color: #90EE90;
+}
+
+.price-save {
+    background: #4CAF50;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.price-desc {
+    color: #666;
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+.end{
+  align-items: center;
+  margin: 15px;
+}
+
+
+/* Адаптивность для pricing explanation */
+@media (max-width: 768px) {
+    .explanation-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .price-comparison {
+        flex-direction: column;
+    }
+    .end{
+      margin: 25px;
+    }
+}

@@ -96,17 +96,5 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     });
     
-    // Обновление бейджа корзины
-    function updateCartBadge() {
-    try {
-        const cart = JSON.parse(localStorage.getItem('manga_cart_v1') || '[]');
-        const badge = document.getElementById('cart-badge');
-        if (badge) {
-        const count = cart.reduce((sum, item) => sum + (item.qty || 0), 0);
-        badge.textContent = count;
-        badge.classList.toggle('hidden', count === 0);
-        }
-    } catch (e) {}
-    }
     updateCartBadge();
 });

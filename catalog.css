@@ -67,15 +67,7 @@ aside.catalog-filters {
   min-height: 260px;
 }
 
-/* Изображение в карточке — адаптивно, чтобы не "сплющивалось" */
-.product-card img {
-  width: 100%;
-  height: auto;
-  max-height: 320px;
-  object-fit: cover;
-  border-radius: 4px;
-  display: block;
-}
+
 
 /* Мета и цена внутри карточки */
 .product-card .meta { font-size: 0.9rem; color: #555; margin: 0; }
@@ -195,16 +187,6 @@ aside.catalog-filters {
   }
 }
 
-/* фиксируем аспект изображения */
-.product-card img {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 3 / 4;
-  object-fit: cover;
-  border-radius: 4px;
-  display: block;
-}
-
 /* фокус-кольцо */
 .btn:focus-visible {
   outline: 3px solid rgba(42,19,101,0.18);
@@ -302,7 +284,7 @@ aside.catalog-filters {
 
   /* Уменьшаем отступы карточки для компактного вертикального списка */
   .product-card { padding: 8px; }
-  .product-card img { max-height: 220px; }
+  .product-card img { max-height: 300px; }
 
   /* Фильтры — компактнее */
   aside.catalog-filters { padding: 10px; }
@@ -346,11 +328,23 @@ aside.catalog-filters {
 
 /* Немного улучшает картинку карточки (плавность) */
 .card-img-wrap { width: 100%; overflow: hidden; border-radius: 6px; }
-.product-img { width: 100%; height: auto; display: block; object-fit: cover; aspect-ratio: 3/4; transition: opacity .18s ease; }
 
 /* Защититься от того, что декоративные блоки перехватывают клики */
 .header-center { pointer-events: none; } /* только если header-center иногда накрывает карточки — проверь результат */
 
 /* Если подчеркивание видно из-за user-agent, явный reset: */
 a { -webkit-text-decoration: none; text-decoration: none; }
+
+.product-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #ffb703;
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 4px;
+}
+
+.product-img { width: 100%; height: auto; display: block; object-fit: cover; aspect-ratio: 3/4; transition: opacity .18s ease; }
+/* Изображение в карточке — адаптивно, чтобы не "сплющивалось" */
 

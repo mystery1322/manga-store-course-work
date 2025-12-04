@@ -36,7 +36,7 @@ window.PRODUCTS = [
         id: 'm3',
         title: 'Манга Спокойной ночи, Пунпун — Том 1 по 13-й',
         author: 'Асано Инио',
-        price: 6799,
+        price: 6299,
         img: 'images/punpun.png',
         images: [
             'images/punpun.png',
@@ -126,7 +126,7 @@ window.PRODUCTS = [
         id: 'm9',
         title: 'Манга Хоримия — Том 1 по 14-й',
         author: 'Хироки Адати — HERO',
-        price: 6499,
+        price: 6750,
         img: 'images/horimiya.png',
         images: [
             'images/horimiya.png',

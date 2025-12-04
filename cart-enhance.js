@@ -36,9 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
   //    — слушаем storage и повторяем инициализацию небольшим таймаутом
   function reInit() {
     // повторно инициализируем иконки и скрытие кнопок
-    root.querySelectorAll('.remove-item').forEach(btn => {
-      if (!btn.querySelector('svg')) makeTrashIcon(btn);
-    });
     document.querySelectorAll('.qty-controls button, .qty-controls .btn').forEach(b => b.style.display = 'none');
     root.querySelectorAll('.cart-item').forEach(ci => ci.style.cursor = 'pointer');
   }

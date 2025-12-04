@@ -1,10 +1,42 @@
 // scripts.js
 // гарантируем, что бейдж обновится при загрузке любой страницы
-document.addEventListener('DOMContentLoaded', () => {
-  try { updateCartBadge(); } catch(e) { /* safe */ }
-});
 
 (function(){
+  'use strict';
+  
+  // Добавляем функцию updateCartBadge в начало файла
+function updateCartBadge() {
+  try {
+    const cart = JSON.parse(localStorage.getItem('manga_cart_v1') || '[]');
+    const badge = document.getElementById('cart-badge');
+    if (badge) {
+      const count = cart.reduce((sum, item) => sum + (item.qty || 0), 0);
+      badge.textContent = count;
+      badge.classList.toggle('hidden', count === 0);
+    }
+  } catch (e) {
+    console.warn('updateCartBadge error:', e);
+  }
+}
+
+// Синхронизация между вкладками
+window.addEventListener('storage', (ev) => {
+  if (ev.key === 'manga_cart_v1') {
+    updateCartBadge();
+  }
+});
+
+// Делаем функцию глобально доступной
+window.updateCartBadge = updateCartBadge;
+  
+  // Делаем функцию глобально доступной
+  window.updateCartBadge = updateCartBadge;
+  
+  // Обновляем бейдж при загрузке страницы
+  document.addEventListener('DOMContentLoaded', () => {
+    try { updateCartBadge(); } catch(e) { /* safe */ }
+  });
+
   const burger = document.getElementById('burgerBtn');
   const header = document.querySelector('.site-header');
   const mainNav = document.querySelector('.main-nav');
@@ -83,6 +115,5 @@ function showToast(msg, type = 'info', ms = 2000){
 }
 
 /* export to window for pages */
-window.appHelpers = { priceFormatter, loadScript, showToast, addToCart, addToCartFromData, loadCart, saveCart, updateCartBadge };
-
-
+// Убрали addToCart из экспорта, так как он не определен в этом файле
+window.appHelpers = { priceFormatter, loadScript, showToast };

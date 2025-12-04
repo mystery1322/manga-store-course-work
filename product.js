@@ -1,4 +1,3 @@
-
 (function () {
   'use strict';
 
@@ -10,10 +9,8 @@
   function $all(sel, root = document) { return Array.from(root.querySelectorAll(sel)); }
 
   function formatPrice(p) {
-    // сохраняем две дробные цифры и знак рубля
     const n = Number(p);
     if (Number.isNaN(n)) return '—';
-    // как пользователь хочет «без лишних нулей»? пока фиксируем 2 знака
     return n.toFixed(2) + ' ₽';
   }
 
@@ -25,79 +22,32 @@
   function safeGetProducts() {
     return (window.PRODUCTS && Array.isArray(window.PRODUCTS)) ? window.PRODUCTS : null;
   }
-
-  /* Простая реализация toast (если внешняя отсутствует) */
-  function showToast(message = '', type = 'info', timeout = TOAST_DEFAULT_TIMEOUT) {
-    if (typeof window.showToast === 'function' && window.showToast !== showToast) {
-      // если уже есть глобальный showToast, используем его
-      try { window.showToast(message, type, timeout); return; } catch (e) { /* fallback below */ }
-    }
-
-    // Уникальный контейнер
-    let container = document.getElementById('simple-toast-container');
-    if (!container) {
-      container = document.createElement('div');
-      container.id = 'simple-toast-container';
-      container.style.position = 'fixed';
-      container.style.right = '18px';
-      container.style.bottom = '18px';
-      container.style.zIndex = '99999';
-      container.style.display = 'flex';
-      container.style.flexDirection = 'column';
-      container.style.gap = '8px';
-      document.body.appendChild(container);
-    }
-
-    const el = document.createElement('div');
-    el.className = 'simple-toast ' + type;
-    el.textContent = message;
-    // стили — минимальные, можно переопределить в CSS
-    el.style.background = 'rgba(30,30,30,0.95)';
-    el.style.color = '#fff';
-    el.style.padding = '8px 12px';
-    el.style.borderRadius = '8px';
-    el.style.boxShadow = '0 6px 18px rgba(0,0,0,0.18)';
-    el.style.fontSize = '14px';
-    el.style.maxWidth = '320px';
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(6px)';
-    el.style.transition = 'opacity .18s ease, transform .18s ease';
-
-    container.appendChild(el);
-
-    // показ
-    requestAnimationFrame(() => {
-      el.style.opacity = '1';
-      el.style.transform = 'translateY(0)';
-    });
-
-    // удаление
-    const to = setTimeout(() => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(6px)';
-      el.addEventListener('transitionend', () => { el.remove(); }, { once: true });
-    }, timeout);
-
-    // кликабельно для закрытия
-    el.addEventListener('click', () => {
-      clearTimeout(to);
-      el.remove();
-    });
-  }
-
+  // Обновляем бейдж при загрузке
+  updateCartBadge();
+ 
   /* ----------------------- Cart helpers ----------------------- */
   function loadCart() {
     try { return JSON.parse(localStorage.getItem(CART_KEY) || '[]'); }
     catch (e) { return []; }
   }
+  
   function saveCart(cart) {
-    try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); }
-    catch (e) { console.warn('saveCart failed', e); }
-    if (typeof window.updateCartBadge === 'function') {
-      try { window.updateCartBadge(); } catch (e) { /* ignore */ }
+    try { 
+      localStorage.setItem(CART_KEY, JSON.stringify(cart)); 
+    } catch (e) { 
+      console.warn('saveCart failed', e); 
     }
+    
+    // ВАЖНО: вызываем updateCartBadge() напрямую, а не через window
+    updateCartBadge();
+    
     // синхронизировать между вкладками
-    try { window.dispatchEvent(new StorageEvent('storage', { key: CART_KEY, newValue: JSON.stringify(cart) })); } catch (e) {}
+    try { 
+      window.dispatchEvent(new StorageEvent('storage', { 
+        key: CART_KEY, 
+        newValue: JSON.stringify(cart) 
+      })); 
+    } catch (e) {}
   }
 
   function addToCartFallback(item, qty = 1) {
@@ -135,10 +85,10 @@
     wrapper.innerHTML = `
       <div class="product-grid-detail" style="gap:24px;display:grid;grid-template-columns:420px 1fr;align-items:start;">
         <div class="product-gallery" aria-label="Галерея товара">
-          <button class="gallery-arrow prev" aria-label="Предыдущее" type="button"></button>          <div class="gallery-main" style="border:1px solid #eee;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:8px;background:#fff;">
+          <button class="gallery-arrow prev" aria-label="Предыдущее" type="button"></button>          
+          <div class="gallery-main" style="border:1px solid #eee;border-radius:8px;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:8px;background:#fff;">
             <img src="${images[0]}" alt="${escapeHtml(item.title)}" class="gallery-current" style="width:100%;height:auto;object-fit:cover;max-height:720px;display:block;">
           </div>
-
           <button class="gallery-arrow next" aria-label="Следующее" type="button"></button>
           <div class="gallery-thumbs" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;"></div>
         </div>
@@ -157,7 +107,7 @@
           </div>
 
           <div style="margin-top:14px;color:#666;font-size:0.95rem;">
-            <p>Детали: состояние — новое. Доставка: 3-7 дней.</p>
+            <p>Детали: состояние — новое. Доступность: 3-7 дней.</p>
           </div>
         </div>
       </div>
@@ -218,33 +168,24 @@
     // Init
     showIndex(0);
 
-    // Add to cart handler
+    // Add to cart handler - ИСПРАВЛЕНО: всегда используем addToCartFallback
     const addBtn = document.getElementById('addToCartBtn');
     addBtn.addEventListener('click', () => {
-    if (typeof window.addToCart === 'function') {
-        try {
-        window.addToCart(item.id, 1);
-        } catch (e) {
-        // fallback to local
-        addToCartFallback(item, 1);
-        // show toast for fallback
-        if (typeof window.showToast === 'function') {
-            try { window.showToast(item.title + ' добавлен в корзину', 'success', 1800); } catch(e){ showToast(item.title + ' добавлен в корзину', 'success', 1800); }
-        } else {
-            showToast(item.title + ' добавлен в корзину', 'success', 1400);
+      // Всегда используем addToCartFallback на странице товара
+      addToCartFallback(item, 1);
+      
+      // Показываем уведомление
+      if (typeof window.showToast === 'function') {
+        try { 
+          window.showToast(item.title + ' добавлен в корзину', 'success', 1800); 
+        } catch(e) { 
+          // Fallback уведомление
+          alert(item.title + ' добавлен в корзину');
         }
-        }
-    } else {
-        // no global addToCart -> fallback + toast
-        addToCartFallback(item, 1);
-        if (typeof window.showToast === 'function') {
-        try { window.showToast(item.title + ' добавлен в корзину', 'success', 1800); } catch(e){ showToast(item.title + ' добавлен в корзину', 'success', 1800); }
-        } else {
-        showToast(item.title + ' добавлен в корзину', 'success', 1400);
-        }
-    }
+      } else {
+        alert(item.title + ' добавлен в корзину');
+      }
     });
-
   }
 
   /* ----------------------- Escape helper for texts inserted into HTML ----------------------- */
@@ -274,9 +215,8 @@
 
     const products = safeGetProducts();
     if (!products) {
-      // PRODUCTS не готов (возможно скрипт не подключён), покажем понятную ошибку в консоли и сообщение пользователю
-      console.warn('product.js: window.PRODUCTS is not defined. Убедитесь, что products-data.js подключён перед product.js');
-      root.innerHTML = '<div class="catalog-empty"><h3>Данные товара не загружены</h3><p>Попробуйте обновить страницу или проверьте подключение products-data.js.</p></div>';
+      console.warn('product.js: window.PRODUCTS is not defined.');
+      root.innerHTML = '<div class="catalog-empty"><h3>Данные товара не загружены</h3><p>Попробуйте обновить страницу.</p></div>';
       return;
     }
 
@@ -294,9 +234,6 @@
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
-    // уже готов
     setTimeout(init, 0);
   }
-
-  
 })();

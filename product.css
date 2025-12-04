@@ -2,29 +2,6 @@
 .product-root { max-width:1100px; margin:0 auto; }
 .product-detail img { width:100%; height:auto; border-radius:8px; object-fit:cover; }
 .product-detail h1 { margin:0 0 8px 0; font-size:1.6rem; color:#2a1365; }
-.product-meta { color:#000000; margin:6px 0; }
-.btn { cursor:pointer; }
-.cart-badge.hidden { display:none; }
-
-/* мастер-правило для цен в карточках */
-.product-card .price,
-.card .price,
-.price {
-  color: #0a7a0a !important; /* яркий зелёный; можно заменить на #28a745 или другой */
-  font-weight: 600;
-}
-
-/* прячем стрелки / кнопки смены фото в карточке */
-.product-card .photo-switch,
-.product-card .photo-switch-btn,
-.product-gallery .thumb-controls {
-  display: none !important;
-}
-
-/* product.css — простая локальная стилизация */
-.product-root { max-width:1100px; margin:0 auto; }
-.product-detail img { width:100%; height:auto; border-radius:8px; object-fit:cover; }
-.product-detail h1 { margin:0 0 8px 0; font-size:1.6rem; color:#2a1365; }
 .product-meta { color:#666; margin:6px 0; }
 .btn { cursor:pointer; }
 .cart-badge.hidden { display:none; }

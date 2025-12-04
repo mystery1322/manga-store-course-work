@@ -144,7 +144,7 @@
       topRow.style.justifyContent = 'space-between';
       topRow.style.alignItems = 'flex-start';
       topRow.style.gap = '8px';
-      topRow.style.marginTop = '5px';
+      topRow.style.marginTop = '9px';
 
       const info = document.createElement('div');
       const titleStrong = document.createElement('strong');
@@ -156,7 +156,7 @@
       const authorDiv = document.createElement('div');
       authorDiv.style.color = '#666';
       authorDiv.style.fontSize = '0.9rem';
-      authorDiv.style.marginTop = '6px';
+      authorDiv.style.marginTop = '10px';
       authorDiv.textContent = 'Автор: ' + (item.author || '—');
       info.appendChild(authorDiv);
 
@@ -189,7 +189,7 @@
       label.style.display = 'block';
       label.style.fontSize = '0.9rem';
       label.style.color = '#444';
-      label.style.marginBottom = '6px';
+      label.style.marginBottom = '2px';
       label.textContent = 'Количество:';
       qtyWrap.appendChild(label);
 
@@ -200,6 +200,7 @@
       input.value = String(item.qty || 1);
       input.setAttribute('aria-label', `Количество ${item.title || ''}`);
       qtyWrap.appendChild(input);
+      
 
       bottomRow.appendChild(qtyWrap);
 
