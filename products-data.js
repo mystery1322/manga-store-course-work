@@ -5,9 +5,9 @@ window.PRODUCTS = [
     title: 'Манга: Влюблённый паразит — Том 1 и 2',
     author: 'Сугару Миаки',
     price: 1199,
-    // главное изображение (backward compat)
+    // главное изображение 
     img: 'images/parasite1.png',
-    // массив дополнительных изображений (3-4 штуки)
+    // массив дополнительных изображений 
     images: [
         'images/parasite1.png',
         'images/parasite2.png',

@@ -1,7 +1,3 @@
-// scripts/cart.js
-// Управление корзиной: рендер, изменение количества через input, удаление, очистка.
-// Ожидает наличие <section id="cart-root"></section> или <div id="cart-container"></div> на странице.
-
 (function () {
   'use strict';
 

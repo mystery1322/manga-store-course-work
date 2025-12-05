@@ -95,6 +95,5 @@ document.addEventListener('DOMContentLoaded', function() {
         currentCaptcha = generateCaptcha();
     }
     });
-    
     updateCartBadge();
 });

@@ -1,4 +1,3 @@
-// scripts/catalog.js
 document.addEventListener('DOMContentLoaded', () => {
   const PROD = (window.PRODUCTS && Array.isArray(window.PRODUCTS)) ? window.PRODUCTS : [];
   const CART_KEY = 'manga_cart_v1';
@@ -42,7 +41,6 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
       `;
       grid.appendChild(art);
-
       // hover behavior: старт/стоп автолистания
       if(imgs.length > 1) {
         const imgEl = art.querySelector('.product-img');
@@ -65,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         art.addEventListener('mouseenter', start);
-        art.addEventListener('focusin', start); // доступность: keyboard focus
+        art.addEventListener('focusin', start); 
         art.addEventListener('mouseleave', stop);
         art.addEventListener('focusout', stop);
       }

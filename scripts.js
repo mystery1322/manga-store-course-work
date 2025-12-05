@@ -1,34 +1,26 @@
-// scripts.js
-// гарантируем, что бейдж обновится при загрузке любой страницы
-
 (function(){
   'use strict';
-  
-  // Добавляем функцию updateCartBadge в начало файла
-function updateCartBadge() {
-  try {
-    const cart = JSON.parse(localStorage.getItem('manga_cart_v1') || '[]');
-    const badge = document.getElementById('cart-badge');
-    if (badge) {
-      const count = cart.reduce((sum, item) => sum + (item.qty || 0), 0);
-      badge.textContent = count;
-      badge.classList.toggle('hidden', count === 0);
+  function updateCartBadge() {
+    try {
+      const cart = JSON.parse(localStorage.getItem('manga_cart_v1') || '[]');
+      const badge = document.getElementById('cart-badge');
+      if (badge) {
+        const count = cart.reduce((sum, item) => sum + (item.qty || 0), 0);
+        badge.textContent = count;
+        badge.classList.toggle('hidden', count === 0);
+      }
+    } catch (e) {
+      console.warn('updateCartBadge error:', e);
     }
-  } catch (e) {
-    console.warn('updateCartBadge error:', e);
   }
-}
 
-// Синхронизация между вкладками
-window.addEventListener('storage', (ev) => {
-  if (ev.key === 'manga_cart_v1') {
-    updateCartBadge();
-  }
-});
+  // Синхронизация между вкладками
+  window.addEventListener('storage', (ev) => {
+    if (ev.key === 'manga_cart_v1') {
+      updateCartBadge();
+    }
+  });
 
-// Делаем функцию глобально доступной
-window.updateCartBadge = updateCartBadge;
-  
   // Делаем функцию глобально доступной
   window.updateCartBadge = updateCartBadge;
   
@@ -56,7 +48,7 @@ window.updateCartBadge = updateCartBadge;
 
   burger.addEventListener('click', ()=> openMenu());
   mainNav.addEventListener('click', (e)=>{
-    if (e.target.tagName === 'A' && header.classList.contains('menu-open')) openMenu(false);
+  if (e.target.tagName === 'A' && header.classList.contains('menu-open')) openMenu(false);
   });
   document.addEventListener('keydown', (e)=>{
     if (e.key === 'Escape') openMenu(false);
@@ -66,9 +58,7 @@ window.updateCartBadge = updateCartBadge;
   });
 })();
 
-/* Global helpers: priceFormatter, loadScript, toast, cart helpers, addToCart */
 const priceFormatter = new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB', maximumFractionDigits: 2 });
-
 function loadScript(src){
   return new Promise((resolve, reject) => {
     if([...document.scripts].some(s=>s.src && s.src.includes(src))) return resolve();
@@ -113,7 +103,4 @@ function showToast(msg, type = 'info', ms = 2000){
     setTimeout(()=> item.remove(), 220);
   }, ms);
 }
-
-/* export to window for pages */
-// Убрали addToCart из экспорта, так как он не определен в этом файле
 window.appHelpers = { priceFormatter, loadScript, showToast };

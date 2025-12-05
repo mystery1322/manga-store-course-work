@@ -114,7 +114,6 @@ h3 { color: 2a1365; margin: 0; margin-top: 10px;}
   transform: translateY(-1px);
 }
 
-/* Специфично: не допускать перенос в "О нас" */
 .main-nav a .no-wrap { display: inline-block; white-space: nowrap; overflow-wrap: normal; word-break: normal; }
 
 /* Кнопка гамбургера — скрыта на десктопе, появляется на мобилке (см. медиазапросы) */
@@ -324,7 +323,6 @@ section, figure {
   .burger { display: inline-flex !important; }
 }
 
-
 :root {
   --brand-blue: #2A1365; /* твой синий = rgb(31,31,139) */
 }
@@ -334,7 +332,6 @@ section, figure {
 .product-title, .product-card .meta, .product-card p, .product-detail h1  { color: var(--brand-blue); font-weight:700; }
 
 
-/* ---- advantages ---- */
 .advantages-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -342,7 +339,6 @@ section, figure {
     margin: 20px 0;
 }
 
-/* ---- community ---- */
 .community ul {
     padding-left: 20px;
 }
@@ -352,7 +348,6 @@ section, figure {
     color: #444;
 }
 
-/* ---- advantages ---- */
 .advantages-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -379,7 +374,6 @@ section, figure {
     font-size: 1.1rem;
 }
 
-/* ---- pricing explanation ---- */
 .pricing-explanation {
     background: linear-gradient(135deg, #f8f9ff 0%, #f0f2ff 100%);
     padding: 20px;

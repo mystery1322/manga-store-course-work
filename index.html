@@ -4,21 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Лавка Мечтаний — О нас</title>
-
     <!-- Подключение иконки сайта -->
     <link rel="icon" type="image/png" href="images/fav.png">
-
     <!-- Подключение CSS -->
     <link href="style.css" rel="stylesheet">
-
     <!-- Подключение шрифта Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    
     <script src="scripts.js" defer></script>
-</head>
-
 </head>
 
 
@@ -35,7 +29,6 @@
         <button id="burgerBtn" class="burger icon-btn" aria-label="Открыть меню" aria-expanded="false" aria-controls="mainNav">
         ☰
         </button>
-        <!-- новая центральная гифка -->
         <div class="header-center">
             <img src="images/bts-cats-cat.gif" alt="" aria-hidden="true" class="header-gif">
             <img src="images/bts-cats-cat.gif" alt="" aria-hidden="true" class="header-gif">
@@ -45,8 +38,6 @@
             <img src="images/bts-cats-cat.gif" alt="" aria-hidden="true" class="header-gif">
             <img src="images/bts-cats-cat.gif" alt="" aria-hidden="true" class="header-gif">
             <img src="images/bts-cats-cat.gif" alt="" aria-hidden="true" class="header-gif">
-
-            <!-- если гиф информативна, поставь осмысленный alt вместо пустого -->
         </div>
 
         <nav class="main-nav" aria-label="Главное меню">
@@ -186,44 +177,43 @@
     left: 50px;
     padding: 0;
     margin-bottom: 50px;
-">
+    ">
     <img src="images/mewo-omori.gif" 
         alt="Наверх" 
         style="width: 105%; height: 105%; object-fit: cover; border-radius: 20%;">
-</button>
+    </button>
 
-<style>
-  /* Телефон: справа */
-  @media (max-width: 699px) {
-    #scrollToTop {
-      left: auto !important;
-      right: 20px !important;
-      bottom: 90px !important; 
+    <style>
+    /* Телефон: справа */
+    @media (max-width: 699px) {
+        #scrollToTop {
+        left: auto !important;
+        right: 20px !important;
+        bottom: 90px !important; 
+        }
     }
-  }
-  
-  /* Большие экраны: еще левее */
-  @media (min-width: 1200px) {
-    #scrollToTop {
-      left: 20px !important;
-      bottom: 90px !important;
+    
+    /* Большие экраны: еще левее */
+    @media (min-width: 1200px) {
+        #scrollToTop {
+        left: 20px !important;
+        bottom: 90px !important;
+        }
     }
-  }
 
-</style>  
+    </style>  
 
-<script>
-  const scrollBtn = document.getElementById('scrollToTop');
-  
-  window.addEventListener('scroll', () => {
-    scrollBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
-  });
-  
-  scrollBtn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-  </script>
-
+    <script>
+        const scrollBtn = document.getElementById('scrollToTop');
+        
+        window.addEventListener('scroll', () => {
+            scrollBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
+        });
+        
+        scrollBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
     <!-- Подвал сайта с контактами и информацией о разработчике -->
     <footer class="site-footer right" style="margin-top:20px;">
         <h2>Связь с нами</h2>

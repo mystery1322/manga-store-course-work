@@ -38,8 +38,6 @@
     } catch (e) { 
       console.warn('saveCart failed', e); 
     }
-    
-    // ВАЖНО: вызываем updateCartBadge() напрямую, а не через window
     updateCartBadge();
     
     // синхронизировать между вкладками
@@ -69,7 +67,7 @@
     saveCart(cart);
   }
 
-  /* ----------------------- Render (product page) ----------------------- */
+  /* ----------------------- Рендер ----------------------- */
   function renderProductPage(item, container) {
     // container — элемент root where to render (например #product-root)
     container.innerHTML = '';
@@ -116,7 +114,6 @@
 
     container.appendChild(wrapper);
 
-    // thumbs
     const thumbsWrap = wrapper.querySelector('.gallery-thumbs');
     const mainImg = wrapper.querySelector('.gallery-current');
     const prevBtn = wrapper.querySelector('.gallery-arrow.prev');
@@ -160,7 +157,6 @@
     nextBtn.addEventListener('click', () => showIndex(curIndex + 1));
     thumbButtons.forEach(b => b.addEventListener('click', () => showIndex(Number(b.dataset.index))));
 
-    // Keyboard navigation
     wrapper.addEventListener('keydown', (ev) => {
       if (ev.key === 'ArrowLeft') { ev.preventDefault(); showIndex(curIndex - 1); }
       if (ev.key === 'ArrowRight') { ev.preventDefault(); showIndex(curIndex + 1); }
@@ -168,8 +164,6 @@
 
     // Init
     showIndex(0);
-
-    // Add to cart handler - ИСПРАВЛЕНО: всегда используем addToCartFallback
     const addBtn = document.getElementById('addToCartBtn');
     addBtn.addEventListener('click', () => {
       // Всегда используем addToCartFallback на странице товара
@@ -189,7 +183,6 @@
     });
   }
 
-  /* ----------------------- Escape helper for texts inserted into HTML ----------------------- */
   function escapeHtml(s) {
     if (s === null || s === undefined) return '';
     return String(s)

@@ -16,8 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
     location.href = `product.html?id=${encodeURIComponent(id)}`;
   });
 
-
-  // 3) Если в верстке есть кнопки +/- внутри .qty-controls — скрываем их (не меняя логики)
   document.querySelectorAll('.qty-controls button, .qty-controls .btn').forEach(b => {
     b.style.display = 'none';
   });
